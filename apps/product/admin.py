@@ -3,7 +3,10 @@ from apps.product.models import Product
 
 
 class ProductAdmin(admin.ModelAdmin):
+    # 搜索框
     search_fields = ("name", "digest",)
+    # 过滤器
+    list_filter = ("public", )
     fieldsets = (
         # 产品主要信息区域
         ["Main",

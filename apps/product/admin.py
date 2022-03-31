@@ -3,6 +3,7 @@ from apps.product.models import Product
 
 
 class ProductAdmin(admin.ModelAdmin):
+    search_fields = ("name", "digest",)
     fieldsets = (
         # 产品主要信息区域
         ["Main",

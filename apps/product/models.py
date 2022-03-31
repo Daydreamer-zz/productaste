@@ -7,7 +7,7 @@ from apps.account.models import Users
 
 # Create your models here.
 class Product(models.Model):
-    pid = models.CharField(max_length=32, unique=True, editable=False)
+    pid = models.CharField(max_length=32, unique=True, editable=False, verbose_name="产品ID")
     name = models.CharField(max_length=100, verbose_name="产品名称")
     url = models.URLField(verbose_name="产品链接")
     digest = models.CharField(max_length=100, verbose_name="产品描述")

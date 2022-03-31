@@ -40,5 +40,6 @@ class ProductVoteuser(models.Model):
 
 @receiver(signal=post_save, sender=Product, dispatch_uid="gen_product_id")
 def update_pid(sender, instance, **kwargs):
-    instance.pid = make_hashid(instance.id, 8)
-    instance.save()
+    if not instance.pid:
+        instance.pid = make_hashid(instance.id, 8)
+        instance.save()

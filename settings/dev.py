@@ -10,7 +10,7 @@ DATABASES = {
         'NAME': 'productaste',
         'USER': 'root',
         'PASSWORD': "199747",
-        'HOST': '192.168.2.10',
+        'HOST': '172.31.85.114',
         'port': 3306,
         'OPTIONS': {
             'charset': 'utf8mb4',

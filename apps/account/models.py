@@ -30,11 +30,6 @@ class Users(AbstractUser):
     def __str__(self):
         return self.username
 
-    def save(self, *args, **kwargs):
-        if not self.uid:
-            self.uid = make_hashid(self.id)
-            self.save()
-
 
 class GithubUser(models.Model):
     user = models.ForeignKey(Users, on_delete=models.CASCADE, blank=True, null=True)

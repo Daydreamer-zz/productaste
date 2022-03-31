@@ -18,7 +18,7 @@ class Users(AbstractUser):
     uid = models.CharField(max_length=32, unique=True, editable=False)
     nickname = models.CharField(max_length=32, blank=True, null=True, default='', verbose_name="昵称")
     gender = models.CharField(max_length=10, choices=GENDERS_CHOICE, default=GENDER_N, verbose_name="性别")
-    avatar = models.CharField(max_length=128, default='', verbose_name="头像")
+    avatar = models.CharField(max_length=128, blank=True, default='', verbose_name="头像")
     create_at = models.DateTimeField(auto_now_add=True, verbose_name="创建时间")
     update_at = models.DateTimeField(auto_now_add=True, verbose_name="更新时间")
 

@@ -27,7 +27,7 @@ class Product(models.Model):
         return self.name
 
 
-class ProductVoteuser(models.Model):
+class ProductVoteUser(models.Model):
     user = models.ForeignKey(Users, on_delete=models.CASCADE)
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
     add_time = models.IntegerField(default=0)

@@ -15,8 +15,8 @@ class Product(models.Model):
     vote_count = models.IntegerField(default=0, verbose_name="点赞数")
     public = models.BooleanField(default=True, verbose_name="是否显示")
     remark = models.CharField(max_length=100, default="", null=True, verbose_name="备注")
-    create_at = models.DateTimeField(auto_now_add=True)
-    update_at = models.DateTimeField(auto_now_add=True)
+    create_at = models.DateTimeField(auto_now_add=True, verbose_name="创建时间")
+    update_at = models.DateTimeField(auto_now=True, verbose_name="更新时间")
 
     class Meta:
         db_table = "products"

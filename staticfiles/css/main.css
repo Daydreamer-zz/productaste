@@ -1,0 +1,47 @@
+a {
+    color: #21ba45;
+}
+
+.ui.inverted.basic.segment.banner {
+    height: 320px;
+    background: url("../images/banner.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    padding-left: 50px;
+    padding-right: 50px;
+}
+
+.ui.inverted.center.aligned.header.slogan {
+position: absolute;
+    font-size: 40px;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.ui.tiny.image.avatar {
+    position: absolute;
+    left: 100%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.upvote-link {
+    position: relative;
+    width: 40px;
+    height: 45px;
+    margin-right: 20px;
+    border-radius: 2px;
+    background: #fff;
+    border: 1px solid #21ba45;
+    padding: 5px;
+}
+
+.upvote-link > i {
+    position: absolute;
+}
+
+.upvote-link:hover {
+    background: #21ba45;
+    color: #fff;
+}

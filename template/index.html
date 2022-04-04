@@ -3,14 +3,68 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <link rel="stylesheet" href="/static/semantic/semantic.css">
+    <link rel="stylesheet" href="/static/css/main.css">
 </head>
 <body>
-<div>
-    <ul>产品列表
-        {% for product in products %}
-            <li>{{ product.pid }}-{{ product.name }}</li>
-        {% endfor %}
-    </ul>
+
+<div class="ui inverted basic segment banner">
+
+    <div class="ui inverted text menu">
+        <div class="item">
+            <h2 class="ui inverted header">菜单</h2>
+        </div>
+
+        <div class="menu right">
+            <div class="item">
+                <button type="button" class="ui circular button">
+                    <i class="icon github alternate"></i>
+                    登录
+                </button>
+            </div>
+        </div>
+
+    </div>
+
+    <h1 class="ui inverted center aligned header slogan">
+        这是一个大标题
+        <p class="ui sub header">二级标题</p>
+        <button class="ui large green circular button">
+            <i class="icon plus"></i>
+            分享产品
+        </button>
+    </h1>
+</div>
+
+<div class="ui basic segment content">
+    <h1 class="ui center aligned header">产品列表</h1>
+
+    <div class="ui centered grid container">
+        <div class="ten wide column">
+            <span>日期</span>
+            <div class="ui divider"></div>
+
+            <div class="ui items">
+                {% for product in products %}
+                <div class="item">
+                    <a href="javascript:void(0);" class="upvote-link">
+                        <i class="icon thumbs up outline"></i>
+                        <span class="vote-count">111</span>
+                    </a>
+                    <div class="content">
+                        <div class="header">{{ product.name }}</div>
+                        <div class="description">{{ product.digest }}</div>
+                        <div class="ui tiny image avatar">
+                            <img src="{{ product.user.avatar }}" alt="{{ product.user.nickname }}">
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+
+        </div>
+    </div>
+
 </div>
 </body>
 </html>

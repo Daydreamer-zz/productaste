@@ -1,7 +1,9 @@
+import uuid
 from django.shortcuts import render
 from django.contrib.auth import authenticate, login
 from django.http import HttpResponseRedirect, HttpResponse
 from django.urls import reverse
+from django.conf import settings
 from apps.account.form import LoginForm
 
 
@@ -21,3 +23,9 @@ def login_view(request):
                 login(request, user)
                 return HttpResponseRedirect(reverse("index"))
     return HttpResponse("<h1>Login Failed</h1>")
+
+
+def auth_github_view(request):
+    url = f"https://github.com/login/oauth/authorize?scope=user:email&" \
+          f"client_id={settings.AUTH['github']['client_id']}&state={uuid.uuid4().hex}"
+    return HttpResponseRedirect(url)

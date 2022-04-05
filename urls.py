@@ -22,5 +22,6 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', index_view, name="index"),
     path('login/', login_view, name="login"),
-    path("auth/github/", auth_github_view, name="auth_github")
+    path("auth/github/", auth_github_view, name="auth_github"),
+    path("auth/github/callback", auth_github_callback, name="auth_github_callback")
 ]

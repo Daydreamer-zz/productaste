@@ -12,7 +12,7 @@ a {
 }
 
 .ui.inverted.center.aligned.header.slogan {
-position: absolute;
+    position: absolute;
     font-size: 40px;
     left: 50%;
     top: 50%;
@@ -26,11 +26,20 @@ position: absolute;
     transform: translate(-50%, -50%);
 }
 
+.ui.items.products > .item {
+    padding: 10px;
+    cursor: pointer;
+}
+
+.ui.items.products > .item:hover {
+    background: #efefef;
+}
+
 .upvote-link {
     position: relative;
     width: 40px;
     height: 45px;
-    margin-right: 20px;
+    margin-right: 30px;
     border-radius: 2px;
     background: #fff;
     border: 1px solid #21ba45;
@@ -39,6 +48,15 @@ position: absolute;
 
 .upvote-link > i {
     position: absolute;
+    left: 50%;
+    transform: translate(-50%, 0);
+}
+
+.upvote-link > span {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, 0);
 }
 
 .upvote-link:hover {

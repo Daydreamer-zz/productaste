@@ -41,15 +41,17 @@
 
     <div class="ui centered grid container">
         <div class="ten wide column">
-            <span>日期</span>
+            {% for dt, items in products_dict.items %}
+            <span>{{ dt }}</span>
             <div class="ui divider"></div>
 
-            <div class="ui items">
-                {% for product in products %}
+            <div class="ui items products">
+            {% if items|length > 0 %}
+                {% for product in items %}
                 <div class="item">
                     <a href="javascript:void(0);" class="upvote-link">
                         <i class="icon thumbs up outline"></i>
-                        <span class="vote-count">111</span>
+                        <span class="vote-count">{{ product.vote_count }}</span>
                     </a>
                     <div class="content">
                         <div class="header">{{ product.name }}</div>
@@ -60,7 +62,11 @@
                     </div>
                 </div>
                 {% endfor %}
+            {% else %}
+                <p>没有产品</p>
+            {% endif %}
             </div>
+            {% endfor %}
 
         </div>
     </div>

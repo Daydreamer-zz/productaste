@@ -152,4 +152,4 @@ cython_debug/
 !**/migrations
 !**/migrations/__init__.py
 
-/settings/dev.py
+settings/dev.py

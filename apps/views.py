@@ -22,4 +22,4 @@ def index_view(request):
             "date": _date.strftime("%Y-%m-%d"),
             "products": products
         }
-        return render(request, "product_item.html", context)
+        return render(request, "components/product_item.tpl.html", context)

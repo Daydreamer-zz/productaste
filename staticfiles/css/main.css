@@ -22,7 +22,7 @@ a {
 .ui.tiny.image.avatar {
     position: absolute;
     left: 100%;
-    top: 50%;
+    top: 10%;
     transform: translate(-50%, -50%);
 }
 
@@ -33,6 +33,10 @@ a {
 
 .ui.items.products > .item:hover {
     background: #efefef;
+}
+
+.ui.items.products > .item > .content {
+    position: relative;
 }
 
 .upvote-link {
@@ -62,4 +66,12 @@ a {
 .upvote-link:hover {
     background: #21ba45;
     color: #fff;
+}
+
+.ui.green.circular.button.load-more {
+    position: absolute;
+    left: 50%;
+    margin-top: 50px;
+    margin-bottom: 50px;
+    transform: translate(-50%, -50%);
 }

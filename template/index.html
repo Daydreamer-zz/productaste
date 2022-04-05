@@ -41,36 +41,68 @@
 
     <div class="ui centered grid container">
         <div class="ten wide column">
-            {% for dt, items in products_dict.items %}
-            <span>{{ dt }}</span>
-            <div class="ui divider"></div>
-
-            <div class="ui items products">
-            {% if items|length > 0 %}
-                {% for product in items %}
-                <div class="item">
-                    <a href="javascript:void(0);" class="upvote-link">
-                        <i class="icon thumbs up outline"></i>
-                        <span class="vote-count">{{ product.vote_count }}</span>
-                    </a>
-                    <div class="content">
-                        <div class="header">{{ product.name }}</div>
-                        <div class="description">{{ product.digest }}</div>
-                        <div class="ui tiny image avatar">
-                            <img src="{{ product.user.avatar }}" alt="{{ product.user.nickname }}">
+            <div id="products-wrapper">
+                {% for dt, items in products_dict.items %}
+                    <span class="date">{{ dt }}</span>
+                    <div class="ui divider"></div>
+                    <div class="ui items products">
+                    {% if items|length > 0 %}
+                        {% for product in items %}
+                        <div class="item">
+                            <a href="javascript:void(0);" class="upvote-link">
+                                <i class="icon thumbs up outline"></i>
+                                <span class="vote-count">{{ product.vote_count }}</span>
+                            </a>
+                            <div class="content">
+                                <div class="header">{{ product.name }}</div>
+                                <div class="description">{{ product.digest }}</div>
+                                <div class="ui tiny image avatar">
+                                    <img src="{{ product.user.avatar }}" alt="{{ product.user.nickname }}">
+                                </div>
+                            </div>
                         </div>
+                        {% endfor %}
+                    {% else %}
+                        <p>没有产品</p>
+                    {% endif %}
                     </div>
-                </div>
                 {% endfor %}
-            {% else %}
-                <p>没有产品</p>
-            {% endif %}
             </div>
-            {% endfor %}
+            <button class="ui green circular button load-more" id="load-btn" type="button">加载更多</button>
 
         </div>
     </div>
 
 </div>
+<script>
+    (function() {
+        var httpRequest;
+        document.getElementById("load-btn").addEventListener("click", makeRequest);
+
+        function makeRequest() {
+            var dateNodes = document.getElementsByClassName("date");
+            var lastDateNode = dateNodes[dateNodes.length - 1];
+            var lastDate = lastDateNode.innerText;
+
+            httpRequest = new XMLHttpRequest()
+
+            httpRequest.onreadystatechange = renderProduct;
+            httpRequest.open("GET", "/?last_dt=" + lastDate);
+            httpRequest.send();
+        }
+
+        function renderProduct() {
+            if (httpRequest.readyState === XMLHttpRequest.DONE ) {
+                if (httpRequest.status === 200) {
+                    var currentNode = document.createRange().createContextualFragment(httpRequest.responseText);
+                    document.getElementById("products-wrapper").appendChild(currentNode);
+                } else {
+                    alert("error");
+                }
+            }
+        }
+
+    })();
+</script>
 </body>
 </html>

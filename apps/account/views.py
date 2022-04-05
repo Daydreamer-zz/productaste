@@ -39,6 +39,7 @@ def auth_github_callback(request):
         return HttpResponseBadRequest(reason="参数错误")
 
     token_url = "https://github.com/login/oauth/access_token"
+
     data = {
         "client_id": settings.AUTH['github']['client_id'],
         "client_secret": settings.AUTH['github']['client_secret'],
@@ -51,5 +52,8 @@ def auth_github_callback(request):
     if access_token == "bad_verification_code":
         return HttpResponseBadRequest(reason="获取token错误")
     user_url = "https://api.github.com/user?access_token=" + access_token
-    user_auth_result = requests.get(user_url).json()
+    headers = {
+        "Authorization": "token " + access_token
+    }
+    user_auth_result = requests.get(user_url, headers=headers).json()
     print(user_auth_result)

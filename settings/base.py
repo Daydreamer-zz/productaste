@@ -127,6 +127,6 @@ AUTH_USER_MODEL = 'account.Users'
 AUTH = {
     "github": {
         "client_id": "b9e4c4de6caf4198febe",
-        "client_secret": "f868512b7fe2830840456915591662d996937b"
+        "client_secret": "05e8a05045d2f6702be5eab47c249aeda0ea72a9",
     }
 }

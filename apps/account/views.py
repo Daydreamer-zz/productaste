@@ -1,5 +1,6 @@
 import uuid
 import requests
+import json
 from django.shortcuts import render
 from django.contrib.auth import authenticate, login
 from django.http import HttpResponseRedirect, HttpResponse, HttpResponseBadRequest
@@ -47,13 +48,13 @@ def auth_github_callback(request):
         "state": state
     }
     req = requests.post(token_url, data=data)
-    result = req.text.split("&")
-    access_token = result[0].split("=")[1]
-    if access_token == "bad_verification_code":
+    access_token = req.text.split("&")[0].split("=")[1]
+    if access_token == "incorrect_client_credentials":
         return HttpResponseBadRequest(reason="获取token错误")
-    user_url = "https://api.github.com/user?access_token=" + access_token
-    headers = {
-        "Authorization": "token " + access_token
-    }
-    user_auth_result = requests.get(user_url, headers=headers).json()
-    print(user_auth_result)
+    else:
+        user_url = "https://api.github.com/user"
+        headers = {
+            "Authorization": "token " + access_token
+        }
+        user_auth_result = requests.get(user_url, headers=headers).json()
+        print(json.dumps(user_auth_result, indent=4, sort_keys=True))

@@ -19,8 +19,8 @@ class Users(AbstractUser):
     nickname = models.CharField(max_length=32, blank=True, null=True, default='', verbose_name="昵称")
     gender = models.CharField(max_length=10, choices=GENDERS_CHOICE, default=GENDER_N, verbose_name="性别")
     avatar = models.CharField(max_length=128, blank=True, default='', verbose_name="头像")
-    create_at = models.DateTimeField(auto_now_add=True, verbose_name="创建时间")
-    update_at = models.DateTimeField(auto_now=True, verbose_name="更新时间")
+    created_at = models.DateTimeField(auto_now_add=True, verbose_name="创建时间")
+    updated_at = models.DateTimeField(auto_now=True, verbose_name="更新时间")
 
     class Meta:
         db_table = "users"
@@ -48,8 +48,8 @@ class GithubUser(models.Model):
     public_gists = models.IntegerField(default=0)
     followers = models.IntegerField(default=0)
     public_repos = models.IntegerField(default=0)
-    create_at = models.CharField(max_length=20)
-    update_at = models.CharField(max_length=20)
+    created_at = models.CharField(max_length=20)
+    updated_at = models.CharField(max_length=20)
 
     class Meta:
         db_table = 'github_user'

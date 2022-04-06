@@ -18,14 +18,25 @@
         <div class="menu right">
             <div class="item">
                 {% if request.user.is_authenticated %}
-                    <div class="ui image">
-                        <img style="width: 50px" src="{{ request.user.avatar }}">
+                    <div class="ui inline dropdown">
+                        <div class="text">
+                            <img class="ui avatar image" src="{{ request.user.avatar }}">
+                            {{ request.user.nickname }}
+                        </div>
+                        <i class="dropdown icon"></i>
+                        <div class="menu">
+                            <a href="/logout/" class="item">注销</a>
+                        </div>
                     </div>
+
+
                 {% else %}
-                    <button type="button" class="ui circular button">
+                    <a href="/auth/github">
+                        <button type="button" class="ui circular button">
                         <i class="icon github alternate"></i>
                         登录
                     </button>
+                    </a>
                 {% endif %}
             </div>
         </div>
@@ -58,8 +69,11 @@
 
 </div>
 <script src="https://cdn.staticfile.org/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://cdn.staticfile.org/semantic-ui/2.4.1/semantic.js"></script>
 <script>
     $(function() {
+        $(".ui.inline.dropdown").dropdown();
+
         $("#load-btn").bind("click", function () {
             var lastDate = $("#products-wrapper .date").last().text()
 

@@ -17,10 +17,16 @@
 
         <div class="menu right">
             <div class="item">
-                <button type="button" class="ui circular button">
-                    <i class="icon github alternate"></i>
-                    登录
-                </button>
+                {% if request.user.is_authenticated %}
+                    <div class="ui image">
+                        <img style="width: 50px" src="{{ request.user.avatar }}">
+                    </div>
+                {% else %}
+                    <button type="button" class="ui circular button">
+                        <i class="icon github alternate"></i>
+                        登录
+                    </button>
+                {% endif %}
             </div>
         </div>
 

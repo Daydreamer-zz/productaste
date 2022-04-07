@@ -3,6 +3,7 @@
 from datetime import timedelta
 from django.shortcuts import render
 from apps.product.models import Product
+from apps.product.form import ProductForm
 from utils.time_utils import form_date, str2date
 
 
@@ -14,7 +15,11 @@ def index_view(request):
             _date = form_date(i).date()
             res = Product.objects.filter(public=True, created_at__contains=_date).order_by("-created_at", "-vote_count")
             products[_date.strftime("%Y-%m-%d")] = res
-        return render(request, "index.html", {"products_dict": products})
+        context = {
+            "products_dict": products,
+            "form": ProductForm
+        }
+        return render(request, "index.html", context)
     else:
         _date = str2date(last_dt) + timedelta(-1)
         products = Product.objects.filter(public=True, created_at__contains=_date).order_by("-created_at", "-vote_count")

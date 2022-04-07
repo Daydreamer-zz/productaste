@@ -17,6 +17,8 @@ from django.contrib import admin
 from django.urls import path
 from apps.views import index_view
 from apps.account.views import login_view, auth_github_view, auth_github_callback, logout_view
+from apps.product.views import add_new_product
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -24,5 +26,6 @@ urlpatterns = [
     path('login/', login_view, name="login"),
     path("logout/", logout_view, name="logout"),
     path("auth/github/", auth_github_view, name="auth_github"),
-    path("auth/github/callback", auth_github_callback, name="auth_github_callback")
+    path("auth/github/callback", auth_github_callback, name="auth_github_callback"),
+    path("product/new/", add_new_product, name="add_new_product")
 ]

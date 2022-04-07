@@ -28,10 +28,8 @@
                             <a href="/logout/" class="item">注销</a>
                         </div>
                     </div>
-
-
                 {% else %}
-                    <a href="/auth/github">
+                    <a href="/auth/github/">
                         <button type="button" class="ui circular button">
                         <i class="icon github alternate"></i>
                         登录
@@ -46,7 +44,7 @@
     <h1 class="ui inverted center aligned header slogan">
         这是一个大标题
         <p class="ui sub header">二级标题</p>
-        <button class="ui large green circular button">
+        <button class="ui large green circular button btn-share">
             <i class="icon plus"></i>
             分享产品
         </button>
@@ -67,13 +65,42 @@
         </div>
     </div>
 
+<div class="ui mini modal share">
+  <div class="header">分享新产品</div>
+  <div class="content">
+      <form action="/product/new/" class="ui form" method="POST">
+          {% csrf_token %}
+          {% for field in form %}
+              <div class="field">
+                {{ field.label_tag }}
+                {{ field }}
+              </div>
+          {% endfor  %}
+          <div class="actions">
+              <div class="ui black deny button">取消</div>
+              <button type="submit" class="ui submit green right labeled icon button btn-submit">
+                  提交
+                  <i class="checkmark icon"></i>
+              </button>
+          </div>
+      </form>
+  </div>
+</div>
+
 </div>
 <script src="https://cdn.staticfile.org/jquery/3.3.1/jquery.min.js"></script>
 <script src="https://cdn.staticfile.org/semantic-ui/2.4.1/semantic.js"></script>
 <script>
     $(function() {
         $(".ui.inline.dropdown").dropdown();
+        {% if request.user.is_authenticated %}
+            $(".btn-share").bind("click", function () {
+               $(".ui.mini.modal.share").modal("show")
+            });
 
+        {% else %}
+            window.location.href = "/auth/github/";
+        {% endif %}
         $("#load-btn").bind("click", function () {
             var lastDate = $("#products-wrapper .date").last().text()
 

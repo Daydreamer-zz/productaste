@@ -1,7 +1,9 @@
+import requests.utils
 from django.shortcuts import render
 from apps.product.models import Product
 from apps.product.form import ProductForm
-from django.http import HttpResponseRedirect, HttpResponse,HttpResponseForbidden
+from apps.product.models import Product
+from django.http import HttpResponseRedirect, HttpResponse, HttpResponseForbidden, JsonResponse
 from django.urls import reverse
 
 
@@ -19,3 +21,18 @@ def add_new_product(request):
             return HttpResponse("<h1>表单内容错误</h1>")
     else:
         return HttpResponseForbidden("<h1>请先登录</h1>")
+
+
+def vote_product(request):
+    p_id = request.POST.get("pid", None)
+    if p_id is None:
+        return JsonResponse({"errcode": 400, "message": "参数错误"})
+    if request.user is None or not request.user.is_authenticated:
+        return JsonResponse({"errcode": 401, "message": "用户未登录"})
+    try:
+        product = Product.objects.get(pid=p_id)
+        product.vote(request.user)
+        return JsonResponse({"errcode": 200, "message": "成功"})
+    except Product.DoesNotExist:
+        return JsonResponse({"errcode": 404, "message": "产品不存在"})
+

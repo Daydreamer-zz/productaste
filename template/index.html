@@ -93,14 +93,15 @@
 <script>
     $(function() {
         $(".ui.inline.dropdown").dropdown();
+
         {% if request.user.is_authenticated %}
             $(".btn-share").bind("click", function () {
                $(".ui.mini.modal.share").modal("show")
             });
-
         {% else %}
             window.location.href = "/auth/github/";
         {% endif %}
+
         $("#load-btn").bind("click", function () {
             var lastDate = $("#products-wrapper .date").last().text()
 
@@ -114,6 +115,28 @@
                     alert(err);
                 }
             })
+        });
+
+        $(".upvote-link").bind("click", function () {
+            var self = $(this);
+            $.ajax({
+               type: "POST",
+               url: "/product/vote/",
+               data: {
+                   pid: self.data("id"),
+                   csrfmiddlewaretoken: $("[name='csrfmiddlewaretoken']").val(),
+               },
+               success: function (response) {
+                   var errcode = response.errcode;
+                   if (errcode === 200) {
+                   } else {
+                       alert(`error, errcode is ${errcode}`);
+                   }
+               },
+               error: function (err) {
+                   alert(err);
+               }
+           });
         });
     });
 </script>

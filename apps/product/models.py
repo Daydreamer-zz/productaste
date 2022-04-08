@@ -1,3 +1,4 @@
+import time
 from django.db import models
 from django.dispatch import receiver
 from django.db.models.signals import post_save
@@ -25,6 +26,15 @@ class Product(models.Model):
 
     def __str__(self):
         return self.name
+
+    def vote(self, user):
+        p_vote = ProductVoteUser()
+        p_vote.user = user
+        p_vote.product = self
+        p_vote.add_time = int(time.time())
+        p_vote.save()
+        self.vote_count += 1
+        self.save(update_fields=["vote_count"])
 
 
 class ProductVoteUser(models.Model):

@@ -117,7 +117,7 @@
             })
         });
 
-        $(".upvote-link").bind("click", function () {
+        $(document).on("click", ".upvote-link", function () {
             var self = $(this);
             $.ajax({
                type: "POST",
@@ -133,8 +133,11 @@
                    if (errcode === 200) {
                        var $vote = self.find(".vote-count");
                        $vote.text(data.vote_count);
-                       self.addClass("active");
-                   } else {
+                       self.addClass("upvote-active");
+                   } else if (errcode === 401) {
+                       window.location.href = "/auth/github/";
+                   }
+                   else {
                        alert(message);
                    }
                },

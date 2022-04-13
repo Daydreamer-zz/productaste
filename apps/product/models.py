@@ -28,19 +28,24 @@ class Product(models.Model):
         return self.name
 
     def vote(self, user):
-        p_vote = ProductVoteUser()
-        p_vote.user = user
-        p_vote.product = self
-        p_vote.add_time = int(time.time())
-        p_vote.save()
-        self.vote_count += 1
-        self.save(update_fields=["vote_count"])
+        if not ProductVoteUser.voted(user, self):
+            p_vote = ProductVoteUser()
+            p_vote.user = user
+            p_vote.product = self
+            p_vote.add_time = int(time.time())
+            p_vote.save()
+            self.vote_count += 1
+            self.save(update_fields=["vote_count"])
 
 
 class ProductVoteUser(models.Model):
     user = models.ForeignKey(Users, on_delete=models.CASCADE)
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
     add_time = models.IntegerField(default=0)
+
+    @classmethod
+    def voted(cls, user, product):
+        return cls.objects.filter(user=user, product=product).exists()
 
     class Meta:
         db_table = "product_vote"

@@ -128,9 +128,14 @@
                },
                success: function (response) {
                    var errcode = response.errcode;
+                   var message = response.message
+                   var data = response.data
                    if (errcode === 200) {
+                       var $vote = self.find(".vote-count");
+                       $vote.text(data.vote_count);
+                       self.addClass("active");
                    } else {
-                       alert(`error, errcode is ${errcode}`);
+                       alert(message);
                    }
                },
                error: function (err) {

@@ -32,7 +32,9 @@ def vote_product(request):
     try:
         product = Product.objects.get(pid=p_id)
         product.vote(request.user)
-        return JsonResponse({"errcode": 200, "message": "成功"})
+        return JsonResponse({"errcode": 200, "message": "成功", "data": {
+            "vote_count": product.vote_count
+        }})
     except Product.DoesNotExist:
         return JsonResponse({"errcode": 404, "message": "产品不存在"})
 

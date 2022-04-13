@@ -63,7 +63,7 @@ a {
     transform: translate(-50%, 0);
 }
 
-.upvote-link:hover {
+.upvote-link:hover, .active {
     background: #21ba45;
     color: #fff;
 }

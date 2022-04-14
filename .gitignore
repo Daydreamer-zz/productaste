@@ -153,3 +153,4 @@ cython_debug/
 !**/migrations/__init__.py
 
 settings/dev.py
+settings/prod.py
